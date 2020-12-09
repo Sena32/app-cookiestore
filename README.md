@@ -27,4 +27,10 @@ This is a solution created with laravel for a cookie delivery and seeks to deter
 
     - [POSTGRES, POSTGIS, PHP 7.3+, COMPOSER, LARAVEL, NODE ]
 
-##run -[php artisan migrate] -[npm install] -[npm run dev] -[php artisan serve] -[Generate Key for Aplication Laravel]
+## Run
+
+    -[php artisan migrate]
+    -[npm install]
+    -[npm run dev]
+    -[php artisan serve]
+    -[Generate Key for Aplication Laravel]
