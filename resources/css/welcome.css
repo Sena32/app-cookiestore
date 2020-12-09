@@ -1,0 +1,133 @@
+body{
+    background-color: #06DB60;
+    font-family: 'Roboto', sans-serif;
+}
+h1,h2,h3,h4{
+    padding: 0;
+    margin: 0;
+}
+
+.content{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100vw;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-right: 100px;
+    margin-bottom: 40px;
+}
+
+.top{
+    margin-top: 40px;
+}
+
+.top-title{
+color: #FFF;
+}
+
+.title{
+    font-family: 'Heebo', sans-serif;
+    font-weight: bold;
+    font-size: 8vw;
+}
+
+.text-top{
+    font-weight:300;
+    font-size: 4vw;
+}
+
+.slogan span{
+    font-weight:bold;
+    font-size: 2vw;
+}
+
+.btn-action{
+    margin-top: 20px;
+    align-self: flex-end;
+}
+
+.btn-action a{
+    text-decoration: none;
+    width: 400px;
+    border-radius: 10px;
+    height: 60px;
+    background-color: #06DB60;
+    border: 2px solid #FFF;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 36px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 40px;
+    transition: all 0.2s;
+}
+
+.btn-action a:hover{
+    cursor: pointer;
+    border: 2px solid #00421c;
+    color: #00421c;
+}
+.container-img{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.img-left{
+    width: 70%;
+    height: 40%;
+}
+
+.arrow{
+    align-self: flex-end;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .container-img{
+        display: none;
+    }
+
+    .right{
+        margin-left: 40px;
+    }
+        .title{
+            font-size: 12vw;
+        }
+        
+        .text-top{
+            font-weight:300;
+            font-size: 8vw;
+        }
+        
+        .slogan span{
+            font-weight:bold;
+            font-size: 4vw;
+        }
+
+        .btn-action a{
+            text-decoration: none;
+            width: 300px;
+            border-radius: 10px;
+            height: 50px;
+            background-color: #06DB60;
+            border: 2px solid #FFF;
+            color: #FFF;
+            font-weight: bold;
+            font-size: 24px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 40px;
+            transition: all 0.2s;
+        }
+  }
+

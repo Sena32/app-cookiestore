@@ -52,7 +52,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
     + location : Point
 
 ##ORDERS
-    + status: Enum
+    + status: ENUM
     + client: Client
     + notes: string
     + products: List(products)
