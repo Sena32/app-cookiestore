@@ -15,6 +15,7 @@
                     <!-- Table Headings -->
                     <thead>
                         <th>Status</th>
+                        <th>Cliente</th>
                         <th>Observações</th>
                         <th>Valor</th>
                         <th></th>
@@ -23,11 +24,14 @@
                     <!-- Table Body -->
                     <tbody>
                         @foreach ($orders as $order)
-                            {{$order}}
                             <tr>
                                 <td class="table-text">
                                 <div>{{ $order->status?"Aberto":"Fechado" }}</div>
 
+                                </td>
+
+                                <td>
+                                    <div>{{ $order->name }}</div>
                                 </td>
 
                                 <td>
@@ -36,6 +40,10 @@
 
                                 <td>
                                 <div>{{ $order->value }}</div>
+                                </td>
+
+                                <td>
+                                <div>{{ $order->st_asgeojson }}</div>
                                 </td>
                             </tr>
                         @endforeach

@@ -22,41 +22,13 @@ var mymap = L.map('mapid');
 let layerPrev = '';
 let data = [];
 
-// async function getData() {
 
-// let url = "{{route('orders.show')}}"
-// let xhr = new XMLHttpRequest();
-// xhr.open('GET', url, true);
-// xhr.onreadystatechange = function() {
-//     if (xhr.readyState == 4) {
-//         if (xhr.status = 200){
-//             // setFields(JSON.parse(xhr.responseText))
-//             // layerPrev!==''&&layerPrev.remove(mymap);
-//             // setMarker(JSON.parse(xhr.responseText))
-//             const res = JSON.stringify(xhr.responseText)
-
-
-//         }
-
-
-//     }
-// }
-// xhr.send();
-// }
-// getData();
-
-
-
-console.log(data)
-
-
-
-// const position = navigator.geolocation.getCurrentPosition((position)=>{
-//     const {latitude:lat,longitude:lng} = position.coords;
-//     mymap.setView([lat, lng], 13);
-//     setMarker({lat,lng});
-//     getAddress({lat,lng});
-// });
+const position = navigator.geolocation.getCurrentPosition((position)=>{
+    const {latitude:lat,longitude:lng} = position.coords;
+    mymap.setView([lat, lng], 13);
+    setMarker({lat,lng});
+    getAddress({lat,lng});
+});
 
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
@@ -122,21 +94,6 @@ xhr.onreadystatechange = function() {
 xhr.send();
 }
 
-axios.get('{{route("orders.show")}}')
-  .then(function (response) {
-            res = []
-            for (let index = 0; index < response.data.length; index++) {
-                const element = response.data[index];
-                res.push(element)
-
-            }
-    console.log(res);
-    data.push(res)
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  })
 
 
 </script>

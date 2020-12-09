@@ -19,10 +19,10 @@ class OrderController extends Controller
     public function index()
     {
         // $orders = Order::all();
-        $orders = FacadesDB::select('select *,ST_AsGeoJSON(location) from orders join clients
+        $orders = FacadesDB::select('select status,notes,value,product_name,product_price,product_amount,name,telephone,street,number,neighborhood,ST_AsGeoJSON(location) from orders join clients
         ON orders.client_id = clients.id');
-        dd($orders);
-        // return view('orders.list',['orders' => $orders]);
+        // dd($orders);
+        return view('orders.list',['orders' => $orders]);
     }
 
     /**

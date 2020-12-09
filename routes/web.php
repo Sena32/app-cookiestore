@@ -21,5 +21,5 @@ use App\Http\Controllers\OrderController;
 
 Route::resource('clients', ClientController::class);
 Route::resource('orders', OrderController::class);
-Route::get('/index', 'App\Http\Controllers\OrderController@filterMain')->name('orders.show');
+// Route::get('/index', 'App\Http\Controllers\OrderController@filterMain')->name('orders.show');
 Route::get('/', 'App\Http\Controllers\OrderController@main');
