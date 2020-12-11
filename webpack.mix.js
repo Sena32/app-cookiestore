@@ -30,3 +30,9 @@ mix.js([
 mix.js([
     'resources/js/bootstrap.js'
 ], 'public/js/bootstrap.js').version();
+
+
+mix.js([
+    'resources/js/mapInsert.js'
+], 'public/js/mapInsert.js').version();
+

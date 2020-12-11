@@ -20,19 +20,34 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px;
+    width: 8vw;
+    min-width: 80px;
 }
 
 .nav-link {
     padding: 0;
-    margin-bottom: 10px;
+}
+.nav-item {
+    width: 100%;
+    height: 80px;
+    display: flex !important;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }
 
-.nav-item a,
-svg {
-    color: #252525 !important;
-    height: 130%;
-    width: 130%;
+.nav-item:hover {
+    background-color: rgba(241, 241, 241, 0.2);
+    cursor: pointer;
+}
+.nav-item a svg {
+    color: #b9b9b9 !important;
+    padding: 0;
+    transition: all 0.3;
+}
+
+.nav-item:hover a svg {
+    color: #181818 !important;
 }
 .down {
     position: relative;
@@ -42,10 +57,12 @@ svg {
 .dropdown-menu {
     display: none;
     position: absolute;
+    overflow: auto;
+    top: -5;
     background-color: #f1f1f1;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 100000;
+    z-index: 1000;
 }
 
 .dropdown-menu a {

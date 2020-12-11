@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\Order;
 use Facade\FlareClient\Http\Response;
-use Illuminate\Support\Facades\DB as FacadesDB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use League\Csv\Writer;
 
 class OrderController extends Controller
 {
@@ -18,11 +20,30 @@ class OrderController extends Controller
      */
     public function index()
     {
+        $orders = DB::table('orders')
+        ->join('clients', 'orders.client_id', '=', 'clients.id')
+        ->select('orders.*', 'clients.*')
+        ->paginate(2);
         // $orders = Order::all();
-        $orders = FacadesDB::select('select status,notes,value,product_name,product_price,product_amount,name,telephone,street,number,neighborhood,ST_AsGeoJSON(location) from orders join clients
-        ON orders.client_id = clients.id');
+        // $orders = DB::select('select status,notes,value,product_name,product_price,product_amount,name,telephone,street,number,neighborhood,ST_AsGeoJSON(location) from orders join clients
+        // ON orders.client_id = clients.id');
         // dd($orders);
         return view('orders.list',['orders' => $orders]);
+    }
+
+    public function filter(Request $request)
+    {
+        // $orders = Order::all();
+
+
+        $orders = DB::table('orders')
+            ->join('clients', 'orders.client_id', '=', 'clients.user_id')
+            ->select('orders.*', 'clients.*')
+            ->get()->paginate(15);
+        // $orders = DB::select('select status,notes,value,product_name,product_price,product_amount,name,telephone,street,number,neighborhood,ST_AsGeoJSON(location) from orders join clients
+        // ON orders.client_id = clients.id');
+        dd($orders);
+        // return view('orders.list',['orders' => $orders]);
     }
 
     /**
@@ -107,16 +128,41 @@ class OrderController extends Controller
     public function filterMain()
     {
         // $orders = Order::all();
-        $orders = FacadesDB::select('select *,ST_AsGeoJSON(location) from orders join clients
-        ON orders.client_id = clients.id');
+        $orders = DB::select("SELECT row_to_json(fc) FROM (
+            SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features FROM (
+                SELECT 'Feature' As type, ST_AsGeoJSON(clients.location)::json AS geometry, row_to_json((orders.id, clients.name, clients.street, clients.number, clients.neighborhood)) AS properties FROM orders join clients
+                ON orders.client_id = clients.id -- WHERE orders.created_at > CURRENT_DATE-180
+            ) As f
+        ) As fc");
         // dd($orders);
-        return response()->json($data=$orders, $status=200);
+        return response()->json($orders[0]->row_to_json );
     }
 
     public function main()
     {
 
         return view('index');
+    }
+
+
+    public function export()
+    {
+        $orders = DB::table('orders')
+        ->join('clients', 'orders.client_id', '=', 'clients.user_id')
+        ->select('orders.*', 'clients.*')
+        ->get();
+
+        $csv = Writer::createFromFileObject(new SplTempFileObject());
+        $csv->insertOne(Schema::getColumnsListing('orders'));
+
+        foreach($orders as $order){
+            $csv->insertOne($order->toArray());
+        }
+
+
+
+        $csv->output('users'.time().'csv');
+
     }
 
 }

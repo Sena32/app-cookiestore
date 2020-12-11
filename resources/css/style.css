@@ -243,3 +243,13 @@ p {
     background-color: #000000;
     color: #fff;
 }
+
+.pagination {
+    display: flex;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.2) 2px 3px 5px 2px;
+}
+.hidden {
+    display: none !important;
+    opacity: 0;
+}

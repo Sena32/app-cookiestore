@@ -21,7 +21,7 @@ class CreateClientsTable extends Migration
             $table->string('street');
             $table->string('neighborhood');
             $table->integer('number');
-            $table->point('location');
+            $table->point('location', 'GEOMETRY', 27700);
             $table->timestamps();
             $table->softDeletes('deleted_at');
         });
