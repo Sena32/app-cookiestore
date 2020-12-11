@@ -12,6 +12,7 @@ const field_telephone = document.querySelector('#telephone');
 const field_street = document.querySelector('#street');
 const field_number = document.querySelector('#number');
 const field_neighborhood = document.querySelector('#neighborhood');
+console.log(field_telephone.value)
 
 
 const position = navigator.geolocation.getCurrentPosition((position)=>{

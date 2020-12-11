@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link href="{{ url(mix('css/global.css')) }}" media="all" rel="stylesheet" type="text/css" />
     <link href="{{ url(mix('css/style.css')) }}" media="all" rel="stylesheet" type="text/css" />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js" integrity="sha512-KaIyHb30iXTXfGyI9cyKFUIRSSuekJt6/vqXtyQKhQP6ozZEGY8nOtRS6fExqE4+RbYHus2yGyYg1BrqxzV6YA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/addons/cleave-phone.bz.js" integrity="sha512-nb3H7w1J0XYC3PnYHV0OziKRzXlq3tFUZKwcASTc1wiybuSeb3BtyNxWPn/2Yr2pXnbRVrbB7Cc2aF5OkaWPaA==" crossorigin="anonymous"></script>
     <script src="{{ url(mix('js/app.js')) }}" defer></script>
 
 

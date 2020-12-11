@@ -3,7 +3,6 @@
 @section('content')
 <div class="content">
     <!-- Current Tasks -->
-    @if (count($clients) > 0)
         <div class="panel panel-default bg-white">
             <P class="form-title title">
                 CLIENTES
@@ -21,7 +20,9 @@
                     </thead>
 
                     <!-- Table Body -->
+
                     <tbody>
+
                         @foreach ($clients as $client)
 
                             <tr>
@@ -45,9 +46,11 @@
                         @endforeach
                     </tbody>
                 </table>
+                @if (count($clients) == 0)
+                        <p style="text-align: center;">Nenhum registro Encontrado</p>
+                    @endif
             </div>
         </div>
-    @endif
 
     </div>
 

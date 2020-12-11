@@ -22,5 +22,6 @@ use App\Http\Controllers\OrderController;
 Route::resource('clients', ClientController::class);
 Route::resource('orders', OrderController::class);
 Route::get('/index', 'App\Http\Controllers\OrderController@filterMain')->name('orders.show');
+// Route::get('/filter', 'App\Http\Controllers\OrderController@filter')->name('orders.search');
 Route::get('/', 'App\Http\Controllers\OrderController@main');
 Route::get('exportToExcel', 'App\Http\Controllers\OrderController@export')->name('orders.export');

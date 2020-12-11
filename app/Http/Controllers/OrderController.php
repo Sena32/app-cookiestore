@@ -21,17 +21,14 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
         $orders = DB::table('orders')
-        ->join('clients', 'orders.client_id', '=', 'clients.id')
-        ->select('orders.*', 'clients.*')
-        ->paginate(2);
-        // $orders = Order::all();
-        // $orders = DB::select('select status,notes,value,product_name,product_price,product_amount,name,telephone,street,number,neighborhood,ST_AsGeoJSON(location) from orders join clients
-        // ON orders.client_id = clients.id');
-        // dd($orders);
-        return view('orders.list',['orders' => $orders]);
+            ->join('clients', 'orders.client_id', '=', 'clients.id')
+            ->select('orders.*', 'clients.*')->where('clients.name', 'LIKE', '%'.$request->search.'%')
+            ->paginate(2);
+            return view('orders.list',['orders' => $orders]);
     }
 
     public function export()
@@ -63,12 +60,11 @@ class OrderController extends Controller
 
         $orders = DB::table('orders')
             ->join('clients', 'orders.client_id', '=', 'clients.id')
-            ->select('orders.*', 'clients.*')
-            ->get();
+            ->select('orders.*', 'clients.*')->where('clients.name', 'LIKE', $request->search.'%')
+            ->paginate(2);
         // $orders = DB::select('select status,notes,value,product_name,product_price,product_amount,name,telephone,street,number,neighborhood,ST_AsGeoJSON(location) from orders join clients
         // ON orders.client_id = clients.id');
-        dd($orders);
-        // return view('orders.list',['orders' => $orders]);
+        return view('orders.list',['orders' => $orders]);
     }
 
     /**

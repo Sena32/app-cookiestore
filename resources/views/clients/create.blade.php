@@ -11,7 +11,7 @@
         <p> Dados de Pessoais:</p>
             <div class="form-group">
                 <input class="form-field" type="text" name="name" id="name" placeholder="NOME"/>
-                <input class="form-field" type="text" name="telephone" id="telephone" placeholder="TELEFONE"/>
+                <input class="form-field" type="telephone" name="telephone" id="telephone" placeholder="TELEFONE"/>
             </div>
             <p> Dados de Endereço:</p>
             <div class="form-group">
