@@ -10,6 +10,9 @@ use Facade\FlareClient\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use League\Csv\Writer;
+use League\Csv\CharsetConverter;
+use League\Csv\Reader;
+use PhpParser\Node\Stmt\Echo_;
 
 class OrderController extends Controller
 {
@@ -31,15 +34,37 @@ class OrderController extends Controller
         return view('orders.list',['orders' => $orders]);
     }
 
+    public function export()
+    {
+        $orders = Order::all();
+        $ver = 1;
+
+        $csv = Writer::createFromFileObject(new \SplTempFileObject());
+        $csv->insertOne(['id','cliente','status','notes','value','product_name','product_price','product_amount']);
+        foreach($orders as $order){
+        $csv->insertOne($order->toArray());
+        }
+
+
+
+        if($ver){
+        $csv->output('users'.time().'.csv');
+        $ver =0;
+        }
+
+        if($ver = 0) return redirect ('orders');
+
+    }
+
     public function filter(Request $request)
     {
         // $orders = Order::all();
 
 
         $orders = DB::table('orders')
-            ->join('clients', 'orders.client_id', '=', 'clients.user_id')
+            ->join('clients', 'orders.client_id', '=', 'clients.id')
             ->select('orders.*', 'clients.*')
-            ->get()->paginate(15);
+            ->get();
         // $orders = DB::select('select status,notes,value,product_name,product_price,product_amount,name,telephone,street,number,neighborhood,ST_AsGeoJSON(location) from orders join clients
         // ON orders.client_id = clients.id');
         dd($orders);
@@ -131,7 +156,7 @@ class OrderController extends Controller
         $orders = DB::select("SELECT row_to_json(fc) FROM (
             SELECT 'FeatureCollection' As type, array_to_json(array_agg(f)) As features FROM (
                 SELECT 'Feature' As type, ST_AsGeoJSON(clients.location)::json AS geometry, row_to_json((orders.id, clients.name, clients.street, clients.number, clients.neighborhood)) AS properties FROM orders join clients
-                ON orders.client_id = clients.id -- WHERE orders.created_at > CURRENT_DATE-180
+                ON orders.client_id = clients.id  WHERE orders.created_at > CURRENT_DATE-180
             ) As f
         ) As fc");
         // dd($orders);
@@ -145,24 +170,6 @@ class OrderController extends Controller
     }
 
 
-    public function export()
-    {
-        $orders = DB::table('orders')
-        ->join('clients', 'orders.client_id', '=', 'clients.user_id')
-        ->select('orders.*', 'clients.*')
-        ->get();
 
-        $csv = Writer::createFromFileObject(new SplTempFileObject());
-        $csv->insertOne(Schema::getColumnsListing('orders'));
-
-        foreach($orders as $order){
-            $csv->insertOne($order->toArray());
-        }
-
-
-
-        $csv->output('users'.time().'csv');
-
-    }
 
 }
